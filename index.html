@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RuangTenang - Konsultasi Psikolog Online</title>
+  <meta name="description" content="Konsultasi dengan psikolog berizin lewat video call atau chat. Jadwal fleksibel, data terjaga rahasia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="wrap header-in">
+    <a href="#" class="logo">Ruang<b>Tenang</b></a>
+    <button type="button" class="burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav">
+      <a href="#layanan">Layanan</a>
+      <a href="#cara">Cara kerja</a>
+      <a href="#tim">Psikolog &amp; Dokter</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+      <a href="#booking" class="btn btn-sun">Buat janji</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="badge">Psikolog berizin</p>
+        <h1>Cerita apa pun boleh. Mulai dari satu sesi bersama psikolog.</h1>
+        <p class="lead">Konsultasi lewat video call, telepon, atau chat dari rumah. Pilih jadwal yang cocok, kami cocokkan dengan psikolog sesuai kebutuhanmu.</p>
+        <div class="hero-cta">
+          <a href="#booking" class="btn btn-sun btn-lg">Konsultasi sekarang</a>
+          <a href="#cara" class="btn btn-ghost btn-lg">Lihat cara kerjanya</a>
+        </div>
+        <ul class="hero-points">
+          <li>Respons admin kurang dari 10 menit</li>
+          <li>Data dan cerita terjaga kerahasiaannya</li>
+          <li>Bisa reschedule sampai 3 jam sebelum sesi</li>
+        </ul>
+      </div>
+
+      <form class="booking" id="booking" novalidate>
+        <h2>Atur sesi pertamamu</h2>
+        <p class="muted">Isi singkat, lalu lanjut ke WhatsApp admin.</p>
+        <label for="nama">Nama panggilan</label>
+        <input id="nama" name="nama" type="text" placeholder="Contoh: Rina" autocomplete="given-name" required>
+
+        <label for="telepon">Nomor telepon</label>
+        <input id="telepon" name="telepon" type="tel" placeholder="Contoh: 081234567890" autocomplete="tel" required>
+
+        <label for="topik">Tipe masalah</label>
+        <select id="topik" name="topik" required>
+          <option value="">Pilih tipe masalah</option>
+          <option value="cemas">Cemas dan sulit tenang</option>
+          <option value="stres">Stres kerja atau kuliah</option>
+          <option value="keluarga">Hubungan dan keluarga</option>
+          <option value="sedih">Perasaan sedih berkepanjangan</option>
+          <option value="anak">Konseling anak dan remaja</option>
+          <option value="adiksi">Kecanduan dan pemulihan</option>
+          <option value="fisik">Keluhan fisik terkait stres</option>
+          <option value="tidur">Gangguan tidur dan keluhan saraf</option>
+          <option value="perinatal">Kesehatan mental saat hamil atau setelah melahirkan</option>
+          <option value="lainnya">Belum tahu, ingin ngobrol dulu</option>
+        </select>
+
+        <label for="ahli">Psikolog atau dokter spesialis</label>
+        <select id="ahli" name="ahli" required disabled>
+          <option value="">Pilih tipe masalah dulu</option>
+        </select>
+
+        <label for="pilihTanggal">Tanggal sesi pertama</label>
+        <button id="pilihTanggal" type="button" class="date-trigger" aria-haspopup="dialog"
+          aria-controls="kalender" aria-describedby="statusTanggal" disabled>
+          <span id="labelTanggal">Pilih konsultan dulu</span><span aria-hidden="true">▦</span>
+        </button>
+        <input id="tanggal" name="tanggal" type="hidden">
+        <p id="statusTanggal" class="booking-note" role="status"></p>
+
+        <label for="paket">Paket sesi</label>
+        <select id="paket" name="paket" required disabled>
+          <option value="">Pilih paket sesi</option>
+          <option>Sesi tunggal (60 menit)</option>
+          <option>Paket 4 sesi</option>
+          <option>Konseling pasangan</option>
+        </select>
+        <p id="statusPaket" class="booking-note" role="status"></p>
+
+        <label for="waktu">Waktu sesi (WIB)</label>
+        <select id="waktu" name="waktu" required disabled>
+          <option value="">Pilih paket sesi dulu</option>
+        </select>
+        <p id="statusWaktu" class="booking-note" role="status"></p>
+
+        <p class="booking-note booking-confirmation">Jadwal dikonfirmasi oleh admin melalui WhatsApp.</p>
+        <p class="error" id="error" role="alert" hidden></p>
+        <button type="submit" class="btn btn-wa btn-block">Lanjut ke WhatsApp</button>
+
+        <dialog id="kalender" class="booking-calendar" aria-labelledby="judulKalender">
+          <div class="calendar-heading">
+            <h3 id="judulKalender">Pilih tanggal sesi</h3>
+            <button id="tutupKalender" type="button" aria-label="Tutup kalender" autofocus>×</button>
+          </div>
+          <div class="calendar-heading">
+            <button id="bulanLalu" type="button" aria-label="Bulan sebelumnya">‹</button>
+            <strong id="bulanKalender" aria-live="polite"></strong>
+            <button id="bulanDepan" type="button" aria-label="Bulan berikutnya">›</button>
+          </div>
+          <div class="calendar-week" aria-hidden="true">
+            <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+          </div>
+          <div id="hariKalender" class="calendar-days"></div>
+          <p class="booking-note calendar-legend">Penuh: semua sesi terisi. Hari berwarna abu-abu berada di luar jadwal praktik atau sudah lewat.</p>
+        </dialog>
+      </form>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Ringkasan layanan">
+    <div class="wrap stats-in">
+      <div><strong data-count="5000" data-suffix="+">0</strong><span>sesi sudah berjalan</span></div>
+      <div><strong data-count="40" data-suffix="+">0</strong><span>psikolog berizin</span></div>
+      <div><strong data-count="98" data-suffix="%">0</strong><span>klien puas dengan sesinya</span></div>
+      <div><strong data-count="7" data-suffix=" hari">0</strong><span>jadwal tersedia tiap minggu</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="layanan">
+    <div class="wrap">
+      <h2 class="sec-title">Yang bisa dibantu psikolog kami</h2>
+      <div class="services">
+        <article><h3>Kecemasan dan stres</h3><p>Pikiran berisik, sulit tidur, dada terasa sesak sebelum bekerja atau ujian.</p></article>
+        <article><h3>Suasana hati dan duka</h3><p>Sedih berlarut, kehilangan semangat, atau sedang berduka dan butuh ditemani.</p></article>
+        <article><h3>Hubungan</h3><p>Konflik dengan pasangan, keluarga, atau rekan kerja, termasuk persiapan menikah.</p></article>
+        <article><h3>Anak dan remaja</h3><p>Sulit fokus, emosi meledak, masalah sekolah, atau pergaulan. Orang tua ikut didampingi.</p></article>
+        <article><h3>Karier dan arah hidup</h3><p>Burnout, bingung memilih jalur, atau merasa jalan di tempat.</p></article>
+        <article><h3>Asesmen psikologis</h3><p>Tes minat bakat, kepribadian, dan kebutuhan seleksi, lengkap dengan laporan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="cara">
+    <div class="wrap">
+      <h2 class="sec-title">Mulai konsultasi dalam empat langkah</h2>
+      <ol class="steps">
+        <li><h3>Isi data dan pilih topik</h3><p>Masukkan nama, nomor telepon, dan masalah yang ingin dibahas.</p></li>
+        <li><h3>Pilih konsultan dan jadwal</h3><p>Lihat konsultan sesuai topikmu, lalu pilih tanggal, paket, dan waktu.</p></li>
+        <li><h3>Bayar dan terima tautan</h3><p>Setelah konfirmasi, tautan video call dikirim lewat WhatsApp.</p></li>
+        <li><h3>Mulai sesi</h3><p>Ikuti konsultasi sesuai waktu dan durasi paket yang dikonfirmasi.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="tim">
+    <div class="wrap">
+      <h2 class="sec-title">Tim Psikolog dan Dokter Spesialis</h2>
+      <p class="center-note muted">Potret pada kartu merupakan ilustrasi.</p>
+      <div class="team">
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-1">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>Anindya R., M.Psi., Psikolog</h3><p class="role">Psikolog Klinis Dewasa</p><p class="pro-desc">Kecemasan, trauma, dan regulasi emosi.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="Anindya R., M.Psi., Psikolog">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-1" role="tooltip">
+            <strong>Anindya R., M.Psi., Psikolog</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>S2 Profesi Psikologi Klinis</dd>
+              <dt>Pengalaman</dt><dd>8 tahun</dd>
+              <dt>Menangani</dt><dd>Kecemasan, trauma, regulasi emosi</dd>
+              <dt>Jadwal praktik</dt><dd>Senin-Jumat, 09.00-17.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Inggris</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-2">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>Dimas P., M.Psi., Psikolog</h3><p class="role">Psikolog Klinis Anak dan Remaja</p><p class="pro-desc">Tumbuh kembang, masalah perilaku, dan pendampingan orang tua.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="Dimas P., M.Psi., Psikolog">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-2" role="tooltip">
+            <strong>Dimas P., M.Psi., Psikolog</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>S2 Profesi Psikologi Klinis Anak</dd>
+              <dt>Pengalaman</dt><dd>7 tahun</dd>
+              <dt>Menangani</dt><dd>Tumbuh kembang, perilaku, parenting</dd>
+              <dt>Jadwal praktik</dt><dd>Selasa-Sabtu, 10.00-18.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Jawa</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-3">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>Sekar M., M.Psi., Psikolog</h3><p class="role">Psikolog Keluarga dan Pasangan</p><p class="pro-desc">Komunikasi, konflik, dan persiapan pernikahan.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="Sekar M., M.Psi., Psikolog">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-3" role="tooltip">
+            <strong>Sekar M., M.Psi., Psikolog</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>S2 Profesi Psikologi Keluarga</dd>
+              <dt>Pengalaman</dt><dd>6 tahun</dd>
+              <dt>Menangani</dt><dd>Konflik pasangan, pranikah, keluarga</dd>
+              <dt>Jadwal praktik</dt><dd>Senin-Sabtu, 13.00-21.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-4">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Raka Pratama, Sp.KJ</h3><p class="role">Dokter Spesialis Kedokteran Jiwa</p><p class="pro-desc">Gangguan cemas, depresi, dan pengobatan yang disertai terapi bicara.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Raka Pratama, Sp.KJ">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-4" role="tooltip">
+            <strong>dr. Raka Pratama, Sp.KJ</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Spesialis Kedokteran Jiwa (Sp.KJ)</dd>
+              <dt>Pengalaman</dt><dd>10 tahun</dd>
+              <dt>Menangani</dt><dd>Gangguan cemas, depresi, terapi obat</dd>
+              <dt>Jadwal praktik</dt><dd>Senin-Kamis, 08.00-15.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Inggris</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-5">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Maya Kusuma, Sp.KJ</h3><p class="role">Psikiater Anak dan Remaja</p><p class="pro-desc">ADHD, gangguan perilaku, dan masalah emosi anak dan remaja.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Maya Kusuma, Sp.KJ">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-5" role="tooltip">
+            <strong>dr. Maya Kusuma, Sp.KJ</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Sp.KJ, minat Psikiatri Anak dan Remaja</dd>
+              <dt>Pengalaman</dt><dd>9 tahun</dd>
+              <dt>Menangani</dt><dd>ADHD, gangguan perilaku, emosi remaja</dd>
+              <dt>Jadwal praktik</dt><dd>Rabu-Sabtu, 09.00-16.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Inggris</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-6">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Bayu Santoso, Sp.KJ</h3><p class="role">Psikiater Adiksi dan Kecanduan</p><p class="pro-desc">Kecanduan gawai, alkohol, dan zat, termasuk pendampingan pemulihan.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Bayu Santoso, Sp.KJ">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-6" role="tooltip">
+            <strong>dr. Bayu Santoso, Sp.KJ</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Sp.KJ, minat Psikiatri Adiksi</dd>
+              <dt>Pengalaman</dt><dd>8 tahun</dd>
+              <dt>Menangani</dt><dd>Kecanduan gawai, alkohol, zat</dd>
+              <dt>Jadwal praktik</dt><dd>Senin-Jumat, 15.00-21.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-7">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Tiara Wulandari, Sp.KJ</h3><p class="role">Psikiater Psikosomatik</p><p class="pro-desc">Keluhan fisik yang dipicu stres, seperti sakit lambung dan jantung berdebar.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Tiara Wulandari, Sp.KJ">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-7" role="tooltip">
+            <strong>dr. Tiara Wulandari, Sp.KJ</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Sp.KJ, minat Psikosomatik</dd>
+              <dt>Pengalaman</dt><dd>7 tahun</dd>
+              <dt>Menangani</dt><dd>Keluhan fisik akibat stres, panik</dd>
+              <dt>Jadwal praktik</dt><dd>Selasa-Jumat, 10.00-17.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Inggris</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-8">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Hendra Wijaya, Sp.S</h3><p class="role">Dokter Spesialis Saraf</p><p class="pro-desc">Gangguan tidur, sakit kepala kronis, dan keluhan saraf terkait stres.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Hendra Wijaya, Sp.S">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-8" role="tooltip">
+            <strong>dr. Hendra Wijaya, Sp.S</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Spesialis Neurologi (Sp.S)</dd>
+              <dt>Pengalaman</dt><dd>12 tahun</dd>
+              <dt>Menangani</dt><dd>Gangguan tidur, sakit kepala kronis</dd>
+              <dt>Jadwal praktik</dt><dd>Senin-Rabu, 08.00-14.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pro" tabindex="0" aria-describedby="profil-ahli-9">
+          <img class="avatar-photo" width="88" height="88" alt="" loading="lazy" decoding="async"
+               src="data:image/webp;base64,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">
+          <h3>dr. Nadia Safitri, Sp.KJ</h3><p class="role">Psikiater Perempuan dan Perinatal</p><p class="pro-desc">Kesehatan mental saat hamil dan setelah melahirkan.</p>
+          <button type="button" class="btn btn-ghost-dark" data-ahli="dr. Nadia Safitri, Sp.KJ">Pilih konsultan ini</button>
+          <div class="pop" id="profil-ahli-9" role="tooltip">
+            <strong>dr. Nadia Safitri, Sp.KJ</strong>
+            <dl>
+              <dt>Pendidikan</dt><dd>Sp.KJ, minat Psikiatri Perinatal</dd>
+              <dt>Pengalaman</dt><dd>6 tahun</dd>
+              <dt>Menangani</dt><dd>Depresi pascamelahirkan, mood hormonal</dd>
+              <dt>Jadwal praktik</dt><dd>Kamis-Minggu, 09.00-17.00 WIB</dd>
+              <dt>Bahasa</dt><dd>Indonesia, Inggris</dd>
+              <dt>Sesi</dt><dd>Video call, telepon, chat</dd>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-ink" id="harga">
+    <div class="wrap">
+      <h2 class="sec-title">Biaya jelas di awal</h2>
+      <div class="plans">
+        <article>
+          <h3>Sesi tunggal</h3>
+          <p class="price">Rp250.000<small>/ 60 menit</small></p>
+          <ul><li>Video call, telepon, atau chat</li><li>Ringkasan sesi</li></ul>
+          <button class="btn btn-sun btn-block" data-paket="Sesi tunggal (60 menit)">Pilih paket ini</button>
+        </article>
+        <article class="featured">
+          <p class="tag">Paling sering dipilih</p>
+          <h3>Paket 4 sesi</h3>
+          <p class="price">Rp850.000<small>/ 4 sesi</small></p>
+          <ul><li>Psikolog yang sama tiap sesi</li><li>Catatan perkembangan</li><li>Hemat Rp150.000</li></ul>
+          <button class="btn btn-sun btn-block" data-paket="Paket 4 sesi">Pilih paket ini</button>
+        </article>
+        <article>
+          <h3>Konseling pasangan</h3>
+          <p class="price">Rp400.000<small>/ 90 menit</small></p>
+          <ul><li>Satu psikolog untuk berdua</li><li>Ruang aman untuk dua pihak</li></ul>
+          <button class="btn btn-sun btn-block" data-paket="Konseling pasangan">Pilih paket ini</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="testimoni">
+    <div class="wrap">
+      <h2 class="sec-title">Kata mereka yang sudah mencoba</h2>
+      <div class="quotes">
+        <blockquote><p>Awalnya ragu, ternyata ngobrol lewat video call terasa lebih santai. Setelah sesi ketiga, tidurku mulai teratur.</p><cite>Rina, 27 tahun, karyawan</cite></blockquote>
+        <blockquote><p>Psikolognya tidak menghakimi. Aku jadi tahu harus mulai dari mana untuk menghadapi stres skripsi.</p><cite>Bagas, 22 tahun, mahasiswa</cite></blockquote>
+        <blockquote><p>Anak kami lebih terbuka setelah beberapa sesi, dan kami diajari cara meresponsnya di rumah.</p><cite>Ibu Lestari, orang tua siswa SD</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="faq">
+    <div class="wrap narrow">
+      <h2 class="sec-title">Pertanyaan yang sering muncul</h2>
+      <div class="faq" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Apakah konsultasi online seefektif bertemu langsung?<i></i></button>
+          <div class="faq-a"><p>Untuk banyak masalah umum seperti cemas, stres, dan hubungan, konseling online terbukti membantu. Untuk kondisi yang membutuhkan penanganan intensif, psikolog akan menyarankan langkah lanjutan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Apakah ceritaku aman?<i></i></button>
+          <div class="faq-a"><p>Psikolog terikat kode etik untuk menjaga kerahasiaan. Cerita dan data pribadimu tidak dibagikan tanpa persetujuanmu, kecuali ada risiko serius bagi keselamatan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Bagaimana jika aku tidak cocok dengan psikolognya?<i></i></button>
+          <div class="faq-a"><p>Kamu bisa meminta ganti psikolog di sesi pertama tanpa biaya tambahan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Apa yang perlu disiapkan sebelum sesi?<i></i></button>
+          <div class="faq-a"><p>Koneksi internet stabil, tempat yang tenang, dan headphone bila ada. Tidak perlu menyiapkan cerita yang rapi, mulai saja dari apa yang terasa paling mengganggu.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Apakah layanan ini untuk kondisi darurat?<i></i></button>
+          <div class="faq-a"><p>Tidak. Jika kamu atau orang di dekatmu berisiko menyakiti diri, segera hubungi layanan gawat darurat setempat atau datang ke IGD terdekat.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Tidak harus menunggu parah untuk bicara dengan psikolog.</h2>
+      <a href="#booking" class="btn btn-sun btn-lg">Buat janji hari ini</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div><a href="#" class="logo">Ruang<b>Tenang</b></a><p>Layanan konsultasi psikologi online.</p></div>
+    <div><p>WhatsApp: +6282135888462</p><p>Email: 25051214113@mhs.unesa.ac.id</p><p>Senin-Minggu, 08.00-21.00 WIB</p></div>
+    <p class="copy">&copy; <span id="year"></span> RuangTenang. Seluruh hak cipta dilindungi.</p>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">Chat WA</a>
+
+<script src="script.js"></script>
+</body>
+</html>
